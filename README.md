@@ -1,7 +1,8 @@
-# SnowBot is a Python library for assisting users in 
-#choosing a ski resort to go to given weather and traffic conditions
+# SnowBot 
+is a Python library for assisting users in choosing a ski resort to go to given 
+weather and traffic conditions
 
-#This is a work in progress and will be updated with new features
+This is a work in progress and will be updated with new features
 
 #Getting started:
 #1) download all of the files and folders in this repository. 
