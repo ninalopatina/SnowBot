@@ -5,26 +5,29 @@ Created on Tue Dec 12 09:58:21 2017
 @author: ninalopatina
 """
 
-#this code inputs weather and traffic data for ski resorts included in the 
-#Tahoe Epic Pass (Kirkwood, Heavenly, Northstar), 
-#plus other user-selected resorts (Mt. Rose), 
-#Outputs the optimal resort to go to & when based on the user's preferences. 
+#this code inputs weather and traffic data for ski resorts included in the
+#Tahoe Epic Pass (Kirkwood, Heavenly, Northstar),
+#plus other user-selected resorts (Mt. Rose),
+#Outputs the optimal resort to go to & when based on the user's preferences.
 
-
+dir_home = '/Users/ninalopatina/Box Sync/snowbot/github/SnowBot/'
+import os
+#go to home directory
+os.chdir(dir_home)
 #get all the parameters
-import snow_params #separate file with all the parameters
-prms = snow_params.importer() #params stored as prms.__ ; see snow_params.py for all 
-
 import snow_funcs #functions the main script calls on
+
+import snow_params #separate file with all the parameters
+prms = snow_params.importer() #params stored as prms.__ ; see snow_params.py for all
+
+#import other packages
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 
 #get the weather dictionary
 wdict = snow_funcs.pickle_wunderground()
 
 def dash_fig(dictt):
-    import snow_params 
-    prms = snow_params.importer() 
-    import matplotlib.pyplot as plt
-    import matplotlib.gridspec as gridspec 
     #make a figure for a quick glance at the next few days' weather
     #create the new figure + subplot parameters
     fig = plt.figure(figsize = (prms.gridspecsC*prms.sizerC,prms.gridspecsR*prms.sizerR))
@@ -35,7 +38,7 @@ def dash_fig(dictt):
         for j in range(prms.gridspecsC):
             rs.append(i)
             cs.append(j)
-            
+
     for day,df in dictt.iteritems():
         df = df.transpose() #transpose is harder to read, easier to plot from
         #fix temp stored as unicode issue:
@@ -50,6 +53,11 @@ def dash_fig(dictt):
         ax.set_xticklabels(df.index.values)
         ax.axhline(prms.freeze,color='k')
         ax.text(0,prms.freeze,'freezing temp')
+    
+    
+    #save the dashboard figure   
+    os.chdir(prms.dir_fig)
+    fig.savefig(str(prms.num_days) +'DayDash' + str(prms.today_file) + '.pdf', format='pdf')
 
 #plot a dashboard figure
 dash_fig(dictt = wdict)
