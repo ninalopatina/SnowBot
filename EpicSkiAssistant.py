@@ -27,6 +27,11 @@ import matplotlib.gridspec as gridspec
 #get the weather dictionary
 wdict = snow_funcs.pickle_wunderground()
 
+
+def make_float(df, var):
+    df[var] = df[var].astype(float)
+    return df
+
 def dash_fig(dictt):
     #make a figure for a quick glance at the next few days' weather
     #create the new figure + subplot parameters
@@ -42,12 +47,13 @@ def dash_fig(dictt):
     for day,df in dictt.iteritems():
         df = df.transpose() #transpose is harder to read, easier to plot from
         #fix temp stored as unicode issue:
-        df.high_temp = df.high_temp.astype(float)
-        df.low_temp = df.low_temp.astype(float)
+        df = make_float(df, 'high_temp')
+        df = make_float(df, 'low_temp')
+#        df = make_float(df, 'precip_percent')        
         dictt[day] = df #transpose is harder to read, easier to plot from
         ax = plt.subplot(gs[rs[day], cs[day]])
         df[prms.sum_keys].plot(ax = ax)#,legend=False)
-        ax.set_ylim([-5,65])
+        ax.set_ylim([-5,105])
         ax.set_title('day ' + str(day))
         ax.set_xticks([0,1,2,3])
         ax.set_xticklabels(df.index.values)

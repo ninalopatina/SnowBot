@@ -46,8 +46,8 @@ def importer():
     weather_keys = ['date','date','date','high','low','avewind','maxwind','snow_day','snow_night','qpf_allday','pop']
     weather_keys2 = ['weekday_short','month','day',degree_mode,degree_mode,'mph','mph',meas_mode,meas_mode,meas_mode]
     #keys you're saving from the wunderground dict
-    weather_key_save = ['day','month','date','high_temp','low_temp','avg_wind','max_wind','snow_day','snow_night','all_day_precip','precip%']
-    sum_keys = ['high_temp','low_temp','max_wind','precip%'] #summary keys
+    weather_key_save = ['day','month','date','high_temp','low_temp','avg_wind','max_wind','snow_day','snow_night','all_day_precip','precip_percent']
+    sum_keys = ['high_temp','low_temp','max_wind','precip_percent'] #summary keys
 
     #plot parameters
     gridspecsR = 2 #rows
