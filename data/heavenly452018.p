@@ -4,6 +4,7 @@ p1
 (dp2
 VtermsofService
 p3
+Vhttp://www.wunderground.com/weather/api/d/terms.html
 p4
 sVversion
 p5
